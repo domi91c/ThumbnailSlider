@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thumbnail Slider</title>
+    <script src="main.js" async></script>
+    <style>
+
+        .container {
+            width: 400px;
+            border: 4px solid #334345;
+            padding: 5px 5px 50px 5px;
+        }
+
+        .box {
+            background-color: #d0e2fa;
+            height: 400px;
+            width: 400px;
+        }
+
+        button {
+            color: white;
+            background-color: #334345;
+            border: none;
+            height: 40px;
+            width: 200px;
+        }
+
+        #leftButton {
+            float: left;
+            border-right: .01rem solid #666;
+        }
+
+        #rightButton {
+            float: right;
+            border-left: .01rem solid #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="box">
+        <img src="images/tns_1.jpg" alt="">
+        <button id="leftButton">Left</button>
+        <button id="rightButton">Right</button>
+    </div>
+</div>
+
+
+</body>
+</html>
