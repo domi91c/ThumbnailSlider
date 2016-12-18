@@ -12,53 +12,53 @@ var ThumbnailSlider = function () {
         this.slides = document.getElementsByClassName("slide");
         this.lBut = document.getElementById("lBut");
         this.rBut = document.getElementById("rBut");
-        this.nextSlButton = document.getElementById("slButtonNext");
-        this.prevSlButton = document.getElementById("slButtonPrev");
+        this.nextSlButton = document.getElementById("thumbButtonNext");
+        this.prevSlButton = document.getElementById("thumbButtonPrev");
         this.slideIndex = 0;
         this.slides[0].style.display = "block";
-        this.slButtons = document.getElementsByClassName("slButton");
+        this.thumbButtons = document.getElementsByClassName("thumb-button");
 
         this.prev();
         this.next();
-        this.prevSlideButton();
-        this.nextSlideButton();
+        this.prevThumbButton();
+        this.nextThumbButton();
         this.slideButtonClick();
 
         this.imageStack = new ImageStack(this.imagePaths);
     }
 
     _createClass(ThumbnailSlider, [{
-        key: "prev",
-        value: function prev() {
+        key: "next",
+        value: function next() {
             var _this = this;
 
-            this.lBut.onclick = function () {
+            this.rBut.onclick = function () {
                 for (var i = 0; i < _this.slides.length; i++) {
                     _this.slides[i].style.display = "none";
                 }
-                if (_this.slideIndex < _this.slides.length - 1) {
-                    _this.slideIndex++;
+                if (_this.slideIndex > 0) {
+                    _this.slideIndex--;
                 } else {
-                    _this.slideIndex = 0;
+                    _this.slideIndex = _this.slides.length - 1;
                 }
-                _this.slides[_this.slideIndex].style.display = "block";
+                _this.showSlide(_this.slideIndex);
             };
         }
     }, {
-        key: "next",
-        value: function next() {
+        key: "prev",
+        value: function prev() {
             var _this2 = this;
 
-            this.rBut.onclick = function () {
+            this.lBut.onclick = function () {
                 for (var i = 0; i < _this2.slides.length; i++) {
                     _this2.slides[i].style.display = "none";
                 }
-                if (_this2.slideIndex > 0) {
-                    _this2.slideIndex--;
+                if (_this2.slideIndex < _this2.slides.length - 1) {
+                    _this2.slideIndex++;
                 } else {
-                    _this2.slideIndex = _this2.slides.length - 1;
+                    _this2.slideIndex = 0;
                 }
-                _this2.slides[_this2.slideIndex].style.display = "block";
+                _this2.showSlide(_this2.slideIndex);
             };
         }
     }, {
@@ -75,48 +75,48 @@ var ThumbnailSlider = function () {
             var _this3 = this;
 
             var _loop = function _loop(i) {
-                _this3.slButtons[i].onclick = function () {
+                _this3.thumbButtons[i].onclick = function () {
                     _this3.showSlide(i);
                 };
             };
 
-            for (var i = 0; i < this.slButtons.length; i++) {
+            for (var i = 0; i < this.thumbButtons.length; i++) {
                 _loop(i);
             }
         }
     }, {
-        key: "nextSlideButton",
-        value: function nextSlideButton() {
+        key: "nextThumbButton",
+        value: function nextThumbButton() {
             var _this4 = this;
 
             this.nextSlButton.onclick = function () {
-                console.log(_this4.imageStack.nextImageSrc());
-                _this4.slideButtonRefresh();
+                console.log(_this4.imageStack.nextImage());
+                _this4.thumbButtonRefresh();
             };
         }
     }, {
-        key: "prevSlideButton",
-        value: function prevSlideButton() {
+        key: "prevThumbButton",
+        value: function prevThumbButton() {
             var _this5 = this;
 
             this.prevSlButton.onclick = function () {
-                console.log(_this5.imageStack.prevImageSrc());
-                _this5.slideButtonRefresh();
+                console.log(_this5.imageStack.prevImage());
+                _this5.thumbButtonRefresh();
             };
         }
     }, {
         key: "printImgSrc",
         value: function printImgSrc() {
             for (var i = 0; i < 4; i++) {
-                var image = this.slButtons[i].children[0];
+                var image = this.thumbButtons[i].children[0];
                 image.src = this.imagePaths[i + 1];
             }
         }
     }, {
-        key: "slideButtonRefresh",
-        value: function slideButtonRefresh() {
-            for (var i = 0; i < this.slButtons.length; i++) {
-                var image = this.slButtons[i].children[0];
+        key: "thumbButtonRefresh",
+        value: function thumbButtonRefresh() {
+            for (var i = 0; i < this.thumbButtons.length; i++) {
+                var image = this.thumbButtons[i].children[0];
                 image.src = this.imageStack.stack[i];
             }
         }
@@ -136,17 +136,15 @@ var ImageStack = function () {
     }
 
     _createClass(ImageStack, [{
-        key: "prevImageSrc",
-        value: function prevImageSrc() {
-            console.log("prev clicked");
+        key: "prevImage",
+        value: function prevImage() {
             var tempImage = this.stack.pop();
             this.stack.unshift(tempImage);
             return this.stack;
         }
     }, {
-        key: "nextImageSrc",
-        value: function nextImageSrc() {
-            console.log("next clicked");
+        key: "nextImage",
+        value: function nextImage() {
             var tempImage = this.stack.shift();
             this.stack.push(tempImage);
             return this.stack;

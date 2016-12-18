@@ -4,33 +4,19 @@ class ThumbnailSlider {
         this.slides = document.getElementsByClassName("slide");
         this.lBut = document.getElementById("lBut");
         this.rBut = document.getElementById("rBut");
-        this.nextSlButton = document.getElementById("slButtonNext");
-        this.prevSlButton = document.getElementById("slButtonPrev");
+        this.nextSlButton = document.getElementById("thumbButtonNext");
+        this.prevSlButton = document.getElementById("thumbButtonPrev");
         this.slideIndex = 0;
         this.slides[0].style.display = "block";
-        this.slButtons = document.getElementsByClassName("slButton");
+        this.thumbButtons = document.getElementsByClassName("thumb-button");
 
         this.prev();
         this.next();
-        this.prevSlideButton();
-        this.nextSlideButton();
+        this.prevThumbButton();
+        this.nextThumbButton();
         this.slideButtonClick();
 
         this.imageStack = new ImageStack(this.imagePaths);
-    }
-
-    prev() {
-        this.lBut.onclick = () => {
-            for (let i = 0; i < this.slides.length; i++) {
-                this.slides[i].style.display = "none";
-            }
-            if (this.slideIndex < this.slides.length - 1) {
-                this.slideIndex++;
-            } else {
-                this.slideIndex = 0;
-            }
-            this.slides[this.slideIndex].style.display = "block";
-        };
     }
 
     next() {
@@ -43,7 +29,21 @@ class ThumbnailSlider {
             } else {
                 this.slideIndex = this.slides.length - 1;
             }
-            this.slides[this.slideIndex].style.display = "block";
+            this.showSlide(this.slideIndex);
+        };
+    }
+
+    prev() {
+        this.lBut.onclick = () => {
+            for (let i = 0; i < this.slides.length; i++) {
+                this.slides[i].style.display = "none";
+            }
+            if (this.slideIndex < this.slides.length - 1) {
+                this.slideIndex++;
+            } else {
+                this.slideIndex = 0;
+            }
+            this.showSlide(this.slideIndex);
         };
     }
 
@@ -55,38 +55,38 @@ class ThumbnailSlider {
     }
 
     slideButtonClick() {
-        for (let i = 0; i < this.slButtons.length; i++) {
-            this.slButtons[i].onclick = () => {
+        for (let i = 0; i < this.thumbButtons.length; i++) {
+            this.thumbButtons[i].onclick = () => {
                 this.showSlide(i)
             }
         }
     }
 
-    nextSlideButton() {
+    nextThumbButton() {
         this.nextSlButton.onclick = () => {
-            console.log(this.imageStack.nextImageSrc());
-            this.slideButtonRefresh();
+            console.log(this.imageStack.nextImage());
+            this.thumbButtonRefresh();
         }
 
     }
 
-    prevSlideButton() {
+    prevThumbButton() {
         this.prevSlButton.onclick = () => {
-            console.log(this.imageStack.prevImageSrc());
-            this.slideButtonRefresh();
+            console.log(this.imageStack.prevImage());
+            this.thumbButtonRefresh();
         }
     }
 
     printImgSrc() {
         for (let i = 0; i < 4; i++) {
-            let image = this.slButtons[i].children[0];
+            let image = this.thumbButtons[i].children[0];
             image.src = this.imagePaths[i + 1];
         }
     }
 
-    slideButtonRefresh() {
-        for (let i = 0; i < this.slButtons.length; i++) {
-            let image = this.slButtons[i].children[0];
+    thumbButtonRefresh() {
+        for (let i = 0; i < this.thumbButtons.length; i++) {
+            let image = this.thumbButtons[i].children[0];
             image.src = this.imageStack.stack[i];
         }
 
@@ -102,15 +102,13 @@ class ImageStack {
         console.log(this.stack);
     }
 
-    prevImageSrc() {
-        console.log("prev clicked");
+    prevImage() {
         let tempImage = this.stack.pop();
         this.stack.unshift(tempImage);
         return this.stack;
     }
 
-    nextImageSrc() {
-        console.log("next clicked");
+    nextImage() {
         let tempImage = this.stack.shift();
         this.stack.push(tempImage);
         return this.stack;
