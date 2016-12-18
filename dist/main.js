@@ -10,16 +10,16 @@ var ThumbnailSlider = function () {
 
         this.imagePaths = ["images/tns_1.jpg", "images/tns_2.jpg", "images/tns_3.jpg", "images/tns_4.jpg"];
         this.slides = document.getElementsByClassName("slide");
-        this.lBut = document.getElementById("lBut");
-        this.rBut = document.getElementById("rBut");
-        this.nextSlButton = document.getElementById("thumbButtonNext");
-        this.prevSlButton = document.getElementById("thumbButtonPrev");
+        this.slideButtonPrev = document.getElementById("slideButtonPrev");
+        this.slideButtonNext = document.getElementById("slideButtonNext");
+        this.thumbButtonPrev = document.getElementById("thumbButtonPrev");
+        this.thumbButtonNext = document.getElementById("thumbButtonNext");
         this.slideIndex = 0;
         this.slides[0].style.display = "block";
         this.thumbButtons = document.getElementsByClassName("thumb-button");
 
-        this.prev();
-        this.next();
+        this.prevSlide();
+        this.nextSlide();
         this.prevThumbButton();
         this.nextThumbButton();
         this.slideButtonClick();
@@ -28,35 +28,36 @@ var ThumbnailSlider = function () {
     }
 
     _createClass(ThumbnailSlider, [{
-        key: "next",
-        value: function next() {
+        key: "nextSlide",
+        value: function nextSlide() {
             var _this = this;
 
-            this.rBut.onclick = function () {
+            this.slideButtonNext.onclick = function () {
+                console.log("clicked next slide button.");
                 for (var i = 0; i < _this.slides.length; i++) {
                     _this.slides[i].style.display = "none";
                 }
-                if (_this.slideIndex > 0) {
-                    _this.slideIndex--;
+                if (_this.slideIndex < _this.slides.length - 1) {
+                    _this.slideIndex++;
                 } else {
-                    _this.slideIndex = _this.slides.length - 1;
+                    _this.slideIndex = 0;
                 }
                 _this.showSlide(_this.slideIndex);
             };
         }
     }, {
-        key: "prev",
-        value: function prev() {
+        key: "prevSlide",
+        value: function prevSlide() {
             var _this2 = this;
 
-            this.lBut.onclick = function () {
+            this.slideButtonPrev.onclick = function () {
                 for (var i = 0; i < _this2.slides.length; i++) {
                     _this2.slides[i].style.display = "none";
                 }
-                if (_this2.slideIndex < _this2.slides.length - 1) {
-                    _this2.slideIndex++;
+                if (_this2.slideIndex > 0) {
+                    _this2.slideIndex--;
                 } else {
-                    _this2.slideIndex = 0;
+                    _this2.slideIndex = _this2.slides.length - 1;
                 }
                 _this2.showSlide(_this2.slideIndex);
             };
@@ -89,7 +90,7 @@ var ThumbnailSlider = function () {
         value: function nextThumbButton() {
             var _this4 = this;
 
-            this.nextSlButton.onclick = function () {
+            this.thumbButtonNext.onclick = function () {
                 console.log(_this4.imageStack.nextImage());
                 _this4.thumbButtonRefresh();
             };
@@ -99,7 +100,7 @@ var ThumbnailSlider = function () {
         value: function prevThumbButton() {
             var _this5 = this;
 
-            this.prevSlButton.onclick = function () {
+            this.thumbButtonPrev.onclick = function () {
                 console.log(_this5.imageStack.prevImage());
                 _this5.thumbButtonRefresh();
             };

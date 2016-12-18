@@ -28,11 +28,11 @@
             font-size: 20px;
         }
 
-        .leftButton {
+        .prev-button {
             float: left;
         }
 
-        .rightButton {
+        .next-button {
             float: right;
         }
 
@@ -42,7 +42,7 @@
             opacity: .8;
         }
 
-        .leftButton:hover, .rightButton:hover {
+        .prev-button:hover, .next-button:hover {
             opacity: .7;
         }
 
@@ -64,6 +64,10 @@
             height: 70px;
             width: 70px;
         }
+
+        .thumb-image {
+            height: 100%;
+        }
     </style>
 </head>
 <body>
@@ -75,24 +79,24 @@
         <div class="slide"><img src="images/tns_3.jpg"></div>
         <div class="slide"><img src="images/tns_4.jpg"></div>
         <div class="buttons">
-            <button id="lBut" class="leftButton">&lsaquo;</button>
-            <button id="rBut" class="rightButton">&rsaquo;</button>
+            <button id="slideButtonPrev" class="prev-button">&lsaquo;</button>
+            <button id="slideButtonNext" class="next-button">&rsaquo;</button>
         </div>
         <div class="thumb-buttons">
             <div class="thumb-button">
-                <img src="images/tns_1.jpg" alt="" style="height: 100%;">
+                <img class="thumb-image" src="images/tns_1.jpg">
             </div>
             <div class="thumb-button">
-                <img src="images/tns_2.jpg" alt="" style="height: 100%;">
+                <img class="thumb-image" src="images/tns_2.jpg">
             </div>
             <div class="thumb-button">
-                <img src="images/tns_3.jpg" alt="" style="height: 100%;">
+                <img class="thumb-image" src="images/tns_3.jpg">
             </div>
             <div class="thumb-button">
-                <img src="images/tns_4.jpg" alt="" style="height: 100%;">
+                <img class="thumb-image" src="images/tns_4.jpg">
             </div>
-            <button id="thumbButtonNext" class="rightButton">&rsaquo;</button>
-            <button id="thumbButtonPrev" class="leftButton">&lsaquo;</button>
+            <button id="thumbButtonNext" class="next-button">&rsaquo;</button>
+            <button id="thumbButtonPrev" class="prev-button">&lsaquo;</button>
         </div>
     </div>
 </div>

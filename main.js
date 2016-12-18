@@ -2,16 +2,16 @@ class ThumbnailSlider {
     constructor() {
         this.imagePaths = ["images/tns_1.jpg", "images/tns_2.jpg", "images/tns_3.jpg", "images/tns_4.jpg"];
         this.slides = document.getElementsByClassName("slide");
-        this.lBut = document.getElementById("lBut");
-        this.rBut = document.getElementById("rBut");
-        this.nextSlButton = document.getElementById("thumbButtonNext");
-        this.prevSlButton = document.getElementById("thumbButtonPrev");
+        this.slideButtonPrev = document.getElementById("slideButtonPrev");
+        this.slideButtonNext = document.getElementById("slideButtonNext");
+        this.thumbButtonPrev = document.getElementById("thumbButtonPrev");
+        this.thumbButtonNext = document.getElementById("thumbButtonNext");
         this.slideIndex = 0;
         this.slides[0].style.display = "block";
         this.thumbButtons = document.getElementsByClassName("thumb-button");
 
-        this.prev();
-        this.next();
+        this.prevSlide();
+        this.nextSlide();
         this.prevThumbButton();
         this.nextThumbButton();
         this.slideButtonClick();
@@ -19,22 +19,9 @@ class ThumbnailSlider {
         this.imageStack = new ImageStack(this.imagePaths);
     }
 
-    next() {
-        this.rBut.onclick = () => {
-            for (let i = 0; i < this.slides.length; i++) {
-                this.slides[i].style.display = "none";
-            }
-            if (this.slideIndex > 0) {
-                this.slideIndex--;
-            } else {
-                this.slideIndex = this.slides.length - 1;
-            }
-            this.showSlide(this.slideIndex);
-        };
-    }
-
-    prev() {
-        this.lBut.onclick = () => {
+    nextSlide() {
+        this.slideButtonNext.onclick = () => {
+            console.log("clicked next slide button.");
             for (let i = 0; i < this.slides.length; i++) {
                 this.slides[i].style.display = "none";
             }
@@ -42,6 +29,20 @@ class ThumbnailSlider {
                 this.slideIndex++;
             } else {
                 this.slideIndex = 0;
+            }
+            this.showSlide(this.slideIndex);
+        };
+    }
+
+    prevSlide() {
+        this.slideButtonPrev.onclick = () => {
+            for (let i = 0; i < this.slides.length; i++) {
+                this.slides[i].style.display = "none";
+            }
+            if (this.slideIndex > 0) {
+                this.slideIndex--;
+            } else {
+                this.slideIndex = this.slides.length - 1;
             }
             this.showSlide(this.slideIndex);
         };
@@ -63,7 +64,7 @@ class ThumbnailSlider {
     }
 
     nextThumbButton() {
-        this.nextSlButton.onclick = () => {
+        this.thumbButtonNext.onclick = () => {
             console.log(this.imageStack.nextImage());
             this.thumbButtonRefresh();
         }
@@ -71,7 +72,7 @@ class ThumbnailSlider {
     }
 
     prevThumbButton() {
-        this.prevSlButton.onclick = () => {
+        this.thumbButtonPrev.onclick = () => {
             console.log(this.imageStack.prevImage());
             this.thumbButtonRefresh();
         }
