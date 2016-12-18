@@ -5,17 +5,17 @@
     <title>Thumbnail Slider</title>
     <script src="main.js" async></script>
     <style>
-
-        .container {
-            width: 400px;
-            border: 4px solid #334345;
-            padding: 5px 5px 50px 5px;
+        button:focus {
+            outline: 0;
         }
 
-        .box {
-            background-color: #d0e2fa;
-            height: 400px;
+        .outer {
+        }
+
+        .inner {
             width: 400px;
+            height: 400px;
+            padding: 0;
         }
 
         button {
@@ -23,27 +23,83 @@
             background-color: #334345;
             border: none;
             height: 40px;
-            width: 200px;
+            width: 40px;
+            margin-bottom: -44px;
+            font-size: 20px;
         }
 
-        #leftButton {
+        .leftButton {
             float: left;
-            border-right: .01rem solid #666;
         }
 
-        #rightButton {
+        .rightButton {
             float: right;
-            border-left: .01rem solid #666;
+        }
+
+        .buttons {
+            position: relative;
+            top: -55%;
+            opacity: .8;
+        }
+
+        .leftButton:hover, .rightButton:hover {
+            opacity: .7;
+        }
+
+        .slide {
+            display: none;
+        }
+
+        .slide-buttons {
+            text-align: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .slButton {
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            border: 2px solid black;
+            height: 70px;
+            width: 70px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="box">
-        <img src="images/tns_1.jpg" alt="">
-        <button id="leftButton">Left</button>
-        <button id="rightButton">Right</button>
+<div class="outer">
+    <div class="inner">
+        <div class="slide">
+            <img src="images/tns_1.jpg" alt="">
+        </div>
+        <div class="slide">
+            <img src="images/tns_2.jpg" alt="">
+        </div>
+        <div class="slide">
+            <img src="images/tns_3.jpg" alt="">
+        </div>
+        <div class="slide">
+            <img src="images/tns_4.jpg" alt="">
+        </div>
+        <div class="buttons">
+            <button id="lBut" class="leftButton">&lsaquo;</button>
+            <button id="rBut" class="rightButton">&rsaquo;</button>
+        </div>
+        <div class="slide-buttons">
+            <div class="slButton">
+                <img src="images/tns_1.jpg" alt="" style="height: 100%;">
+            </div>
+            <div class="slButton">
+                <img src="images/tns_2.jpg" alt="" style="height: 100%;">
+            </div>
+            <div class="slButton">
+                <img src="images/tns_3.jpg" alt="" style="height: 100%;">
+            </div>
+            <div class="slButton">
+                <img src="images/tns_4.jpg" alt="" style="height: 100%;">
+            </div>
+        </div>
     </div>
 </div>
 
