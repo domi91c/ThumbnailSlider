@@ -33,7 +33,6 @@ var ThumbnailSlider = function () {
             var _this = this;
 
             this.slideButtonNext.onclick = function () {
-                console.log("clicked next slide button.");
                 for (var i = 0; i < _this.slides.length; i++) {
                     _this.slides[i].style.display = "none";
                 }
@@ -104,14 +103,6 @@ var ThumbnailSlider = function () {
                 console.log(_this5.imageStack.prevImage());
                 _this5.thumbButtonRefresh();
             };
-        }
-    }, {
-        key: "printImgSrc",
-        value: function printImgSrc() {
-            for (var i = 0; i < 4; i++) {
-                var image = this.thumbButtons[i].children[0];
-                image.src = this.imagePaths[i + 1];
-            }
         }
     }, {
         key: "thumbButtonRefresh",

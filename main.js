@@ -21,7 +21,6 @@ class ThumbnailSlider {
 
     nextSlide() {
         this.slideButtonNext.onclick = () => {
-            console.log("clicked next slide button.");
             for (let i = 0; i < this.slides.length; i++) {
                 this.slides[i].style.display = "none";
             }
@@ -75,13 +74,6 @@ class ThumbnailSlider {
         this.thumbButtonPrev.onclick = () => {
             console.log(this.imageStack.prevImage());
             this.thumbButtonRefresh();
-        }
-    }
-
-    printImgSrc() {
-        for (let i = 0; i < 4; i++) {
-            let image = this.thumbButtons[i].children[0];
-            image.src = this.imagePaths[i + 1];
         }
     }
 
